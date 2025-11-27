@@ -1,21 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About · Dev Space</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exam Documentation · Dev Space</title>
+
+  <!-- same fonts as your main page -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* extra styling for code blocks and exam sections */
+    .exam-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .exam-intro {
+      margin-bottom: 20px;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .exam-section {
+      margin-bottom: 18px;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 65%);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.75);
+    }
+
+    .exam-section h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: #f9fafb;
+    }
+
+    .exam-question {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .exam-answer-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    pre {
+      margin: 0 0 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      overflow-x: auto;
+      font-size: 0.8rem;
+      font-family: "Fira Code", monospace;
+    }
+
+    code {
+      font-family: "Fira Code", monospace;
+    }
+
+    .exam-explanation {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      margin-left: 6px;
+    }
+
+    .badge span {
+      color: #22c55e;
+    }
+
+    @media (max-width: 768px) {
+      .exam-container {
+        padding-inline: 0;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <!-- Header / Nav (adapt links to your project) -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">dev-space</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="exam-doc.html">Exam Docs</a>
+      </nav>
+    </header>
 
-  <!-- Put your header here (copy from index.html) -->
-  
-  <main class="page">
-    <h1>About Me</h1>
-    <p>This is my new page!</p>
-  </main>
+    <main class="exam-container">
+      <section class="exam-intro">
+        <h1 style="margin: 0 0 4px; font-size: 1.2rem;">Documentation: Test Exam (Teil A)</h1>
+        <p style="margin: 0 0 6px; font-size: 0.9rem;">
+          This page explains how to solve the exam questions step by step. Each section shows:
+        </p>
+        <ul style="margin: 0 0 8px 18px; padding: 0; font-size: 0.85rem; color: #9ca3af;">
+          <li>the original question,</li>
+          <li>the relevant command(s),</li>
+          <li>a short explanation.</li>
+        </ul>
+        <p style="margin: 0; font-size: 0.85rem; color: #9ca3af;">
+          Note: user names, paths and IP addresses are examples. In the real exam, use the values given by your teacher.
+        </p>
+      </section>
 
-  <!-- Put your footer here -->
+      <!-- Q1 -->
+      <section class="exam-section" id="q1">
+        <h2>1. Copy document <code>a</code> from Teams to <code>vm1</code></h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Kopiere das Dokument <code>a</code> von Teams auf die <code>vm1</code>.
+        </div>
+        <div class="exam-answer-title">Example command</div>
+        <pre><code># run on your host (where Teams file is downloaded)
+scp ~/Downloads/a user@vm1:~/</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li><code>scp</code> = secure copy over SSH.</li>
+            <li><code>~/Downloads/a</code> = path where you saved the file from Teams.</li>
+            <li><code>user@vm1:~/</code> = copy to the home directory of <code>user</code> on <code>vm1</code>.</li>
+          </ul>
+        </div>
+      </section>
 
+      <!-- Q2 -->
+      <section class="exam-section" id="q2">
+        <h2>2. Copy document <code>b</code> from Teams to <code>vm2</code></h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Kopiere das Dokument <code>b</code> von Teams auf die <code>vm2</code>.
+        </div>
+        <div class="exam-answer-title">Example command</div>
+        <pre><code>scp ~/Downloads/b user@vm2:~/</code></pre>
+        <div class="exam-explanation">
+          Same idea as question 1, just a different file and target VM.
+        </div>
+      </section>
+
+      <!-- Q3 -->
+      <section class="exam-section" id="q3">
+        <h2>3. Copy document <code>c</code> to <code>vm1</code> and <code>vm2</code></h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Kopiere das Dokument <code>c</code> von Teams auf die <code>vm1</code> und auf die <code>vm2</code>.
+        </div>
+        <div class="exam-answer-title">Example commands</div>
+        <pre><code>scp ~/Downloads/c user@vm1:~/
+scp ~/Downloads/c user@vm2:~/</code></pre>
+        <div class="exam-explanation">
+          Copy the same file to both machines using two <code>scp</code> commands.
+        </div>
+      </section>
+
+      <!-- Q4 -->
+      <section class="exam-section" id="q4">
+        <h2>4. Create <code>newdoc</code> on <code>vm1</code> and copy to Teams</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Erstelle ein Dokument <code>newdoc</code> auf <code>vm1</code> mit:<br>
+          <code>echo hallo, ich heisse full name &gt; ~/newdoc</code> und kopiere das Dokument auf Teams.
+        </div>
+        <div class="exam-answer-title">Create the file on vm1</div>
+        <pre><code>echo "hallo, ich heisse full name" &gt; ~/newdoc</code></pre>
+        <div class="exam-answer-title">Copy it back to your host (then upload to Teams)</div>
+        <pre><code>scp user@vm1:~/newdoc ~/Downloads/</code></pre>
+        <div class="exam-explanation">
+          After running <code>scp</code> you can upload <code>newdoc</code> from your host (e.g. from
+          <code>~/Downloads</code>) to Teams via the GUI.
+        </div>
+      </section>
+
+      <!-- Q5 -->
+      <section class="exam-section" id="q5">
+        <h2>5. Create user <code>hans</code> with password <code>hans123</code></h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Erstelle einen neuen User <code>hans</code> mit Passwort <code>hans123</code>, schreibe den Befehl auf.
+        </div>
+        <div class="exam-answer-title">Typical solution (two commands)</div>
+        <pre><code>sudo useradd hans
+echo "hans:hans123" | sudo chpasswd</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li><code>useradd hans</code> creates the user.</li>
+            <li><code>chpasswd</code> sets the password from the <code>username:password</code> pair.</li>
+            <li>On some systems you might use <code>adduser hans</code> and then <code>sudo passwd hans</code>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Q6 -->
+      <section class="exam-section" id="q6">
+        <h2>6. Create a public/private keypair</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Erstelle einen neuen public/private keypair, schreibe Befehl auf.
+        </div>
+        <div class="exam-answer-title">SSH keypair (commonly used)</div>
+        <pre><code>ssh-keygen -t rsa -b 4096 -f ~/.ssh/mykey</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li><code>-t rsa</code> = RSA key type.</li>
+            <li><code>-b 4096</code> = key length in bits.</li>
+            <li><code>-f ~/.ssh/mykey</code> = file name. This creates <code>mykey</code> (private) and <code>mykey.pub</code> (public).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Q7 + Q8 -->
+      <section class="exam-section" id="q7">
+        <h2>7/8. Copy a file from <code>vm1</code> to <code>vm2</code></h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Basierend auf der <code>vm1</code>, kopiere ein File von <code>vm1</code> auf <code>vm2</code>, schreibe Befehl auf.
+        </div>
+        <div class="exam-answer-title">Example command (run on vm1)</div>
+        <pre><code>scp ~/file.txt user@vm2:~/</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li>Assumes you are logged in on <code>vm1</code>.</li>
+            <li><code>file.txt</code> is the file you want to copy.</li>
+            <li><code>user@vm2:~/</code> is the target user and target directory on <code>vm2</code>.</li>
+          </ul>
+        </div>
+        <div class="exam-explanation">
+          If question 8 is similar, you can use the same pattern with a different file name.
+        </div>
+      </section>
+
+      <!-- Q9 -->
+      <section class="exam-section" id="q9">
+        <h2>9. Copy a file from <code>vm1</code> to a guest VM</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Kopiere ein File von <code>vm1</code> auf eine Gast-VM, schreibe Befehl auf.
+        </div>
+        <div class="exam-answer-title">Example command (run on vm1)</div>
+        <pre><code>scp ~/file.txt user@guest-vm:~/</code></pre>
+        <div class="exam-explanation">
+          Replace <code>guest-vm</code> with the correct hostname or IP address given in the exam.
+        </div>
+      </section>
+
+      <!-- Q10 -->
+      <section class="exam-section" id="q10">
+        <h2>10. Create <code>my_authorized_keys</code> from three public keys</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Erstelle ein File <code>my_authorized_keys</code> im gleichen Format wie <code>authorized_keys</code> mit (mindestens) drei public keys aus der Klasse.
+        </div>
+        <div class="exam-answer-title">Example commands</div>
+        <pre><code># assume you downloaded three public keys:
+# key1.pub, key2.pub, key3.pub
+cat key1.pub key2.pub key3.pub &gt; ~/.ssh/my_authorized_keys</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li>All three lines are concatenated into one file.</li>
+            <li>The format is identical to a normal <code>authorized_keys</code> file: one public key per line.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Q11 -->
+      <section class="exam-section" id="q11">
+        <h2>11. Encrypt a message with <code>openssl</code> and your keypair</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> Verschlüssle mit dem <code>openssl</code> Kommando die Botschaft
+          <code>"Mein name ist Hase"</code> mit deinem Schlüsselpaar, schreibe den Befehl auf.
+        </div>
+        <div class="exam-answer-title">Example with RSA keypair</div>
+        <pre><code>echo "Mein name ist Hase" | \
+openssl rsautl -encrypt -pubin -inkey mykey.pub -out message.enc</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li><code>mykey.pub</code> = your public key from question 6.</li>
+            <li><code>-encrypt</code> = encrypt the input.</li>
+            <li><code>-out message.enc</code> = encrypted output file.</li>
+          </ul>
+          To decrypt (for testing), you could use:
+          <pre><code>openssl rsautl -decrypt -inkey mykey -in message.enc</code></pre>
+        </div>
+      </section>
+
+      <!-- Q12 -->
+      <section class="exam-section" id="q12">
+        <h2>12. <code>netcat</code> command: listen on port 8877</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> <code>netcat</code> Kommando, das auf Port 8877 auf eine Verbindung wartet.
+        </div>
+        <div class="exam-answer-title">Typical commands</div>
+        <pre><code>nc -l 8877</code></pre>
+        <div class="exam-explanation">
+          On some systems you might need:
+          <pre><code>nc -l -p 8877</code></pre>
+          This opens a listener on TCP port 8877 and waits for a client.
+        </div>
+      </section>
+
+      <!-- Q13 -->
+      <section class="exam-section" id="q13">
+        <h2>13. <code>netcat</code> STDIO redirect to host on port 4455</h2>
+        <div class="exam-question">
+          <strong>Question:</strong> <code>netcat</code> Kommando, das den STDIO (standard input/output)
+          auf Port 4455 auf Host <code>&lt;ip address&gt;</code> umleitet.
+        </div>
+        <div class="exam-answer-title">Example command</div>
+        <pre><code>nc &lt;ip address&gt; 4455</code></pre>
+        <div class="exam-explanation">
+          <ul>
+            <li>Replace <code>&lt;ip address&gt;</code> with the given IP.</li>
+            <li>Everything you type is sent to that host on port 4455; what the server sends back is shown in your terminal.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span id="year"></span> dev-space · Exam documentation</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
