@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Knowledge Orbit — Developer Blog</title>
+    <meta name="description" content="Notes, guides and experiments from a developer. Topics: web, tooling, open source, and career." />
+    <style>
+        :root{
+            --bg:#0f1720; --card:#0b1220; --muted:#98a0b3; --accent:#7dd3fc; --txt:#e6eef6;
+        }
+        @media (prefers-color-scheme: light){
+            :root{
+                --bg:#f7fbff; --card:#ffffff; --muted:#586273; --accent:#0369a1; --txt:#062029;
+            }
+        }
+        html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#071021);color:var(--txt);-webkit-font-smoothing:antialiased}
+        .container{max-width:1000px;margin:48px auto;padding:24px}
+        header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#012;box-shadow:0 6px 18px rgba(2,6,23,.5)}
+        h1{font-size:1.25rem;margin:0}
+        p.lead{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
+        nav{display:flex;gap:12px;align-items:center}
+        a.btn{background:transparent;color:var(--txt);padding:8px 12px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.04);font-size:0.95rem}
+        a.btn.primary{background:var(--accent);color:#022;box-shadow:0 6px 18px rgba(7,10,25,.35)}
+        main{margin-top:28px;display:grid;grid-template-columns:1fr 320px;gap:24px}
+        .hero{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px}
+        .hero h2{margin:0 0 8px;font-size:1.1rem}
+        .meta{color:var(--muted);font-size:0.9rem;margin-bottom:12px}
+        .excerpt{line-height:1.5;color:var(--muted);margin-bottom:12px}
+        .post-list{display:grid;gap:12px;margin-top:16px}
+        .post{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+        .post h3{margin:0 0 6px;font-size:1rem}
+        .post p{margin:0;color:var(--muted);font-size:0.92rem}
+        aside .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);margin-bottom:12px}
+        .search{display:flex;gap:8px}
+        input[type="search"]{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--txt)}
+        footer{margin-top:36px;color:var(--muted);font-size:0.9rem;text-align:center}
+        @media (max-width:880px){
+            main{grid-template-columns:1fr; padding-bottom:40px}
+            .logo{width:48px;height:48px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo" aria-hidden="true">KO</div>
+                <div>
+                    <h1>Knowledge Orbit</h1>
+                    <p class="lead">Concise notes, practical tutorials and engineering insights</p>
+                </div>
+            </div>
+            <nav>
+                <a class="btn" href="#about">About</a>
+                <a class="btn" href="#posts">Posts</a>
+                <a class="btn primary" href="#subscribe">Subscribe</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <div class="hero" role="region" aria-labelledby="welcome">
+                    <h2 id="welcome">Welcome — developer blog</h2>
+                    <div class="meta">Focused on web development, tooling, open source and dev career tips</div>
+                    <p class="excerpt">Short walkthroughs, reproducible experiments and bite-sized architecture notes. Expect code-first posts, clear examples and links to repositories for each article.</p>
+
+                    <div id="posts" class="post-list" aria-live="polite">
+                        <article class="post">
+                            <h3>Getting started with a modern static blog</h3>
+                            <p>Guide: build, deploy and optimize a static blog using plain HTML, minimal tooling and CI. (5 min read)</p>
+                        </article>
+
+                        <article class="post">
+                            <h3>Small improvements that speed up dev loops</h3>
+                            <p>Tips for faster feedback cycles: hot reloads, selective builds, and caching strategies. (6 min)</p>
+                        </article>
+
+                        <article class="post">
+                            <h3>Open source workflow: sane defaults</h3>
+                            <p>Practical defaults for contributing, reviewing and maintaining healthy repos. (7 min)</p>
+                        </article>
+                    </div>
+                </div>
+
+                <section id="about" style="margin-top:18px">
+                    <h3 style="margin-bottom:8px">About this blog</h3>
+                    <p class="excerpt">This site is a personal collection of notes and tutorials created while solving real problems. Each post includes runnable examples and links to code when applicable.</p>
+                </section>
+            </section>
+
+            <aside>
+                <div class="card" id="subscribe">
+                    <strong>Stay updated</strong>
+                    <p style="margin:8px 0;color:var(--muted)">Subscribe for new posts and short tips.</p>
+                    <form onsubmit="event.preventDefault();subscribe();" style="display:flex;gap:8px">
+                        <input id="email" type="email" placeholder="you@company.com" required />
+                        <button class="btn primary" type="submit">Subscribe</button>
+                    </form>
+                    <div id="submsg" style="margin-top:8px;color:var(--muted);font-size:0.9rem"></div>
+                </div>
+
+                <div class="card">
+                    <strong>Quick links</strong>
+                    <nav style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+                        <a class="btn" href="#" style="text-align:left">Archive</a>
+                        <a class="btn" href="#" style="text-align:left">Speaking</a>
+                        <a class="btn" href="#" style="text-align:left">Contact</a>
+                        <a class="btn" href="#" style="text-align:left">RSS</a>
+                    </nav>
+                </div>
+
+                <div class="card">
+                    <strong>Search posts</strong>
+                    <div class="search" style="margin-top:8px">
+                        <input id="q" type="search" placeholder="Search..." />
+                        <button class="btn" onclick="filter()">Go</button>
+                    </div>
+                    <div id="results" style="margin-top:8px;color:var(--muted)"></div>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <div>© <span id="year"></span> Knowledge Orbit — Built with clarity and code.</div>
+        </footer>
+    </div>
+
+    <script>
+        // small interactivity: subscribe mock + search filter + year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function subscribe(){
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('submsg');
+            if(!email){ msg.textContent = 'Enter a valid email.'; return; }
+            msg.textContent = 'Thanks — subscription saved (demo).';
+            document.getElementById('email').value = '';
+        }
+
+        function filter(){
+            const q = document.getElementById('q').value.toLowerCase().trim();
+            const posts = Array.from(document.querySelectorAll('.post'));
+            const results = document.getElementById('results');
+            if(!q){ posts.forEach(p=>p.style.display='block'); results.textContent=''; return; }
+            let found = 0;
+            posts.forEach(p=>{
+                const text = (p.innerText||'').toLowerCase();
+                const visible = text.includes(q);
+                p.style.display = visible ? 'block' : 'none';
+                if(visible) found++;
+            });
+            results.textContent = found ? found + ' match(es)' : 'No results';
+        }
+    </script>
+</body>
+</html>
