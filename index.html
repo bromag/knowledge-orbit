@@ -1,13 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Knowledge Orbit</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dev Space Blog</title>
+
+  <!-- Google Fonts: Inter (UI) + Fira Code (terminal/dev) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h1>Bromag</h1>
-    <p>Welcome to the Bromag knowledge orbit. Explore the vast universe of information and insights we have gathered for you.</p>
-    
+  <div class="page">
+    <!-- Top navigation -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">dev-space</span>
+      </div>
+      <nav class="nav">
+        <a href="#posts">Posts</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero / terminal style intro -->
+    <section class="hero">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">~/dev-space/blog</span>
+        </div>
+        <div class="terminal-body">
+          <p class="prompt">
+            <span class="prompt-user">you@dev-space</span>
+            <span class="prompt-sign">$</span>
+            <span class="prompt-command">whoami</span>
+          </p>
+          <p class="terminal-output">Full-stack learner, curious about clean code and modern tooling.</p>
+
+          <p class="prompt">
+            <span class="prompt-user">you@dev-space</span>
+            <span class="prompt-sign">$</span>
+            <span class="prompt-command">echo "Welcome to my blog"</span>
+          </p>
+          <p class="terminal-output highlight">Welcome to my developer journal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog posts -->
+    <main class="content" id="posts">
+      <section class="posts">
+        <h2 class="section-title">Latest posts</h2>
+
+        <article class="post-card">
+          <div class="post-meta">
+            <span class="post-date">2025 · 11 · 27</span>
+            <span class="post-tag">#getting-started</span>
+          </div>
+          <h3 class="post-title">Setting up my dev-space on GitHub Pages</h3>
+          <p class="post-excerpt">
+            In this post I walk through how I created this blog with a simple HTML/CSS setup, a clean folder structure,
+            and a developer-friendly dark theme.
+          </p>
+          <a href="#" class="post-link">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <div class="post-meta">
+            <span class="post-date">2025 · 11 · 20</span>
+            <span class="post-tag">#css</span>
+          </div>
+          <h3 class="post-title">From zero to dark mode: styling like a pro</h3>
+          <p class="post-excerpt">
+            A quick overview of how I use CSS custom properties, typography, and spacing to make small projects look
+            professional without heavy frameworks.
+          </p>
+          <a href="#" class="post-link">Read more →</a>
+        </article>
+
+        <article class="post-card">
+          <div class="post-meta">
+            <span class="post-date">2025 · 11 · 10</span>
+            <span class="post-tag">#terminal</span>
+          </div>
+          <h3 class="post-title">Why I love terminal-style UIs</h3>
+          <p class="post-excerpt">
+            Terminal fonts, prompts, and subtle animations give developer sites a unique personality.
+            Here is how I recreate that look in the browser.
+          </p>
+          <a href="#" class="post-link">Read more →</a>
+        </article>
+      </section>
+
+      <!-- Sidebar area -->
+      <aside class="sidebar">
+        <section class="about" id="about">
+          <h2 class="section-title">About me</h2>
+          <p>
+            I am a developer in progress, writing about what I learn: web, tooling, workflows and experiments.
+          </p>
+        </section>
+
+        <section class="stack">
+          <h2 class="section-title">Current stack</h2>
+          <ul class="stack-list">
+            <li>HTML / CSS / JavaScript</li>
+            <li>Git & GitHub</li>
+            <li>Terminal-first workflow</li>
+          </ul>
+        </section>
+
+        <section class="contact" id="contact">
+          <h2 class="section-title">Contact</h2>
+          <p>
+            Best place to reach me:  
+            <span class="contact-highlight">github.com/your-username</span>
+          </p>
+        </section>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>© <span id="year"></span> dev-space · Built with HTML & CSS</span>
+    </footer>
+  </div>
+
+  <!-- Tiny JS just to keep the year up to date (optional) -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
