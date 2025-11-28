@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Posts · Dev Space</title>
+
+  <!-- same fonts as your main page -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* extra styling for code blocks and exam sections */
+    .post-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .post-intro {
+      margin-bottom: 20px;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .post-section {
+      margin-bottom: 18px;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 65%);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.75);
+    }
+
+    .all-posts h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: #f9fafb;
+    }
+
+    .post-question {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .post-answer-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    pre {
+      margin: 0 0 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      overflow-x: auto;
+      font-size: 0.8rem;
+      font-family: "Fira Code", monospace;
+    }
+
+    code {
+      font-family: "Fira Code", monospace;
+    }
+
+    .post-explanation {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      margin-left: 6px;
+    }
+
+    .badge span {
+      color: #22c55e;
+    }
+
+    @media (max-width: 768px) {
+      .post-container {
+        padding-inline: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header / Nav (adapt links to your project) -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Knowledge Orbit</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+      </nav>
+    </header>
+
+      <!-- Q1 -->
+      <section class="all-posts" id="q1">
+        <h2>All knowledge Orbit Posts</h2>
+        <div class="post-explanation">
+          <pre><a href="knowledge-orbit-network-cloud.html" class="post-link">Network Cloud Linux</a>
+<a href="knowledge-orbit-apache2.html" class="post-link">Apache2 and dnsmasq Setup</a><code>
+      </section>
+
+
+    <footer class="site-footer">
+      <span>© <span id="year"></span>knowledge-orbit · Built with HTML & CSS</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
