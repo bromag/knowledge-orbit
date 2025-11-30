@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,9 @@
   <!-- same fonts as your main page -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css" />
   <style>
@@ -102,6 +105,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <!-- Header / Nav (adapt links to your project) -->
@@ -117,219 +121,383 @@
 
     <main class="exam-container">
       <section class="exam-intro">
-        <h1 style="margin: 0 0 4px; font-size: 1.2rem;">Documentation: Test Exam (Teil A)</h1>
+        <h1 style="margin: 0 0 4px; font-size: 1.2rem;">Documentation: Installation und Konfiguration von Apache2</h1>
         <p style="margin: 0 0 6px; font-size: 0.9rem;">
-          This page explains how to solve the exam questions step by step. Each section shows:
+          This page explains how to install and configure the Apache2 web server on a Linux system.
         </p>
         <ul style="margin: 0 0 8px 18px; padding: 0; font-size: 0.85rem; color: #9ca3af;">
-          <li>the original question,</li>
+          <li>Configuration Apache2</li>
           <li>the relevant command(s),</li>
           <li>a short explanation.</li>
         </ul>
         <p style="margin: 0; font-size: 0.85rem; color: #9ca3af;">
-          Note: user names, paths and IP addresses are examples. In the real exam, use the values given by your teacher.
+          Note: IP addresses, user names, and paths are examples. Use the values specific to your environment.
         </p>
       </section>
 
       <!-- Q1 -->
       <section class="exam-section" id="q1">
-        <h2>1. Copy document <code>a</code> from Teams to <code>vm1</code></h2>
+        <h2>1. Update and Upgrade your system</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Kopiere das Dokument <code>a</code> von Teams auf die <code>vm1</code>.
         </div>
-        <div class="exam-answer-title">Example command</div>
-        <pre><code># run on your host (where Teams file is downloaded)
-scp ~/Downloads/a user@vm1:~/</code></pre>
+        <div class="exam-answer-title">Command</div>
+        <pre><code>sudo apt update
+sudo apt upgrade -y</code></pre>
         <div class="exam-explanation">
           <ul>
-            <li><code>scp</code> = secure copy over SSH.</li>
-            <li><code>~/Downloads/a</code> = path where you saved the file from Teams.</li>
-            <li><code>user@vm1:~/</code> = copy to the home directory of <code>user</code> on <code>vm1</code>.</li>
+            <li><code>apt update</code> refreshes the package list.</li>
+            <li><code>apt upgrade -y</code> upgrades all installed packages to their latest versions. The
+              <code>-y</code> flag automatically confirms the upgrade.
+            </li>
           </ul>
         </div>
       </section>
 
       <!-- Q2 -->
       <section class="exam-section" id="q2">
-        <h2>2. Copy document <code>b</code> from Teams to <code>vm2</code></h2>
+        <h2>2. Install Apache2</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Kopiere das Dokument <code>b</code> von Teams auf die <code>vm2</code>.
         </div>
-        <div class="exam-answer-title">Example command</div>
-        <pre><code>scp ~/Downloads/b user@vm2:~/</code></pre>
+        <div class="exam-answer-title">Command</div>
+        <pre><code>sudo apt install apache2 -y</code></pre>
         <div class="exam-explanation">
-          Same idea as question 1, just a different file and target VM.
+          Installs the Apache2 web server package. The <code>-y</code> flag automatically confirms the installation.
         </div>
       </section>
 
       <!-- Q3 -->
       <section class="exam-section" id="q3">
-        <h2>3. Copy document <code>c</code> to <code>vm1</code> and <code>vm2</code></h2>
+        <h2>3. Adjust the firewall on Ubuntu</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Kopiere das Dokument <code>c</code> von Teams auf die <code>vm1</code> und auf die <code>vm2</code>.
+          <strong>Information:</strong> Before testing Apache, it’s necessary to modify the firewall settings to allow
+          outside access to the default web ports. If you followed the instructions in the prerequisites, you should
+          have a UFW firewall configured to restrict access to your server.
+          During installation, Apache registers itself with UFW to provide a few application profiles that can be used
+          to enable or disable access to Apache through the firewall.
         </div>
-        <div class="exam-answer-title">Example commands</div>
-        <pre><code>scp ~/Downloads/c user@vm1:~/
-scp ~/Downloads/c user@vm2:~/</code></pre>
+        <div class="exam-answer-title">Commands</div>
+        <pre><code>sudo ufw enable # if not already enabled
+sudo ufw app list
+</code></pre>
+        </code></pre>
         <div class="exam-explanation">
-          Copy the same file to both machines using two <code>scp</code> commands.
+          Check available UFW application profiles, including those for Apache.
         </div>
+        <p class="exam-answer-title">Output</p>
+        <pre><code>Available applications:
+Apache 
+Apache Full
+Apache Secure
+OpenSSH</code></pre>
+        <p class="exam-answer-title">Command</p>
+        <pre><code>sudo ufw allow 'Apache'
+sudo ufw status</code></pre>
+        <div class="exam-answer-title">Output</div>
+        <pre><code>Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Apache (v6)                ALLOW       Anywhere (v6)
+    </code></pre>
+        <div class="exam-explanation">
+          Dont forget to allow SSH if you need remote access:
+        </div>
+        <pre><code>sudo ufw allow ssh</code></pre>
       </section>
 
       <!-- Q4 -->
       <section class="exam-section" id="q4">
-        <h2>4. Create <code>newdoc</code> on <code>vm1</code> and copy to Teams</h2>
+        <h2>4. How to check your Web Server</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Erstelle ein Dokument <code>newdoc</code> auf <code>vm1</code> mit:<br>
-          <code>echo hallo, ich heisse full name &gt; ~/newdoc</code> und kopiere das Dokument auf Teams.
+          <strong>At the end of the installation process, Ubuntu starts Apache. The web server will already be up and
+            running.</strong>
         </div>
-        <div class="exam-answer-title">Create the file on vm1</div>
-        <pre><code>echo "hallo, ich heisse full name" &gt; ~/newdoc</code></pre>
-        <div class="exam-answer-title">Copy it back to your host (then upload to Teams)</div>
-        <pre><code>scp user@vm1:~/newdoc ~/Downloads/</code></pre>
+        <div class="exam-answer-title">Make sure the service is active by running the command for the systemd init
+          system:</div>
+        <pre><code>sudo systemctl status apache2</code></pre>
+        <div class="exam-answer-title">Output</div>
         <div class="exam-explanation">
-          After running <code>scp</code> you can upload <code>newdoc</code> from your host (e.g. from
-          <code>~/Downloads</code>) to Teams via the GUI.
+          Typical output should indicate that the service is active (running).
+          <pre><code>apache2.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/apache2.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2025-11-30 18:02:54 UTC; 36min ago
+       Docs: https://httpd.apache.org/docs/2.4/
+    Process: 1292 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+    Process: 1519 ExecReload=/usr/sbin/apachectl graceful (code=exited, status=0/SUCCESS)
+   Main PID: 1295 (apache2)
+      Tasks: 55 (limit: 4545)
+     Memory: 5.2M (peak: 7.1M)
+        CPU: 234ms
+     CGroup: /system.slice/apache2.service
+             ├─1295 /usr/sbin/apache2 -k start
+             ├─1523 /usr/sbin/apache2 -k start
+             └─1524 /usr/sbin/apache2 -k start
+            </code></pre>
+        </div>
+        <div class="exam-explanation">
+          As confirmed by this output, the service has started successfully. However, the best way to test this is to
+          request a page from Apache.<br><br>
+          You can access the default Apache landing page to confirm that the software is running properly through your
+          IP address. If you do not know your server’s IP address, you can get it a few different ways from the
+          command line.
+        </div><br>
+        <div class="exam-explanation">
+          Try writing the following at your server’s command prompt:
+        </div>
+        <pre><code>hostname -I</code></pre>
+        <div class="exam-explanation">
+          When you have your server’s IP address, enter it into your browser’s address bar:
+        </div>
+        <pre><code>http://your_server_ip</code></pre>
+        <div class="exam-explanation">
+          You will see the default Ubuntu Apache web page
         </div>
       </section>
 
       <!-- Q5 -->
       <section class="exam-section" id="q5">
-        <h2>5. Create user <code>hans</code> with password <code>hans123</code></h2>
+        <h2>5. How to Manage the Apache Process</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Erstelle einen neuen User <code>hans</code> mit Passwort <code>hans123</code>, schreibe den Befehl auf.
+          <strong>Now that you have your web server up and running, let’s review some basic management commands using
+            systemctl.</strong>
         </div>
-        <div class="exam-answer-title">Typical solution (two commands)</div>
-        <pre><code>sudo useradd hans
-echo "hans:hans123" | sudo chpasswd</code></pre>
         <div class="exam-explanation">
-          <ul>
-            <li><code>useradd hans</code> creates the user.</li>
-            <li><code>chpasswd</code> sets the password from the <code>username:password</code> pair.</li>
-            <li>On some systems you might use <code>adduser hans</code> and then <code>sudo passwd hans</code>.</li>
-          </ul>
+          To stop your web server, run:
         </div>
+        <pre><code>sudo systemctl stop apache2</code></pre>
+        <div class="exam-explanation">
+          To start the web server when it is stopped, run:
+        </div>
+        <pre><code>sudo systemctl start apache2</code></pre>
+        <div class="exam-explanation">
+          To stop and then start the service again, run:
+        </div>
+        <pre><code>sudo systemctl restart apache2</code></pre>
+        <div class="exam-explanation">
+          If you are simply making configuration changes, Apache can often reload without dropping connections. To do
+          this, use the following command:
+        </div>
+        <pre><code>sudo systemctl reload apache2</code></pre>
+        <div class="exam-explanation">
+          By default, Apache is configured to start automatically when the server boots. If this is not what you want,
+          disable this behavior by running:
+        </div>
+        <pre><code>sudo systemctl disable apache2</code></pre>
+        <div class="exam-explanation">
+          To re-enable the service to start up at boot, run:
+        </div>
+        <pre><code>sudo systemctl enable apache2</code></pre>
       </section>
 
       <!-- Q6 -->
       <section class="exam-section" id="q6">
-        <h2>6. Create a public/private keypair</h2>
+        <h2>6. How to Set Up Virtual Hosts (Recommended)</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Erstelle einen neuen public/private keypair, schreibe Befehl auf.
+          When using the Apache web server, you can use virtual hosts (similar to server blocks in Nginx) to encapsulate
+          configuration details and host more than one domain from a single server. We will set up a domain called
+          your_domain, but you should replace this with your own domain name.
         </div>
-        <div class="exam-answer-title">SSH keypair (commonly used)</div>
-        <pre><code>ssh-keygen -t rsa -b 4096 -f ~/.ssh/mykey</code></pre>
+        <div class="exam-question">
+          Apache on Ubuntu has one server block enabled by default that is configured to serve documents from the
+          /var/www/html directory. While this works well for a single site, it can become unwieldy if you are hosting
+          multiple sites. Instead of modifying /var/www/html, create a directory structure within /var/www for a
+          your_domain site, leaving /var/www/html in place as the default directory to be served if a client request
+          doesn’t match any other sites.
+        </div>
         <div class="exam-explanation">
-          <ul>
-            <li><code>-t rsa</code> = RSA key type.</li>
-            <li><code>-b 4096</code> = key length in bits.</li>
-            <li><code>-f ~/.ssh/mykey</code> = file name. This creates <code>mykey</code> (private) and <code>mykey.pub</code> (public).</li>
-          </ul>
+          To re-enable the service to start up at boot, run:
         </div>
+        <pre><code>sudo mkdir /var/www/your_domain</code></pre>
+        <div class="exam-explanation">
+          Next, assign ownership of the directory to your user and the www-data group (used by Apache):
+        </div>
+        <pre><code>sudo chown -R $USER:www-data /var/www/your_domain</code></pre>
+        <div class="exam-explanation">
+          Set secure permissions so that only your user can write, and everyone (including Apache) can read and access
+          files:
+        </div>
+        <pre><code>sudo chmod -R u=rwX,go=rX /var/www/your_domain</code></pre>
+        <div class="exam-explanation">
+          Next, create a sample index.html page using nano or your favorite editor:
+        </div>
+        <pre><code>sudo nano /var/www/your_domain/index.html</code></pre>
+        <div class="exam-explanation">
+          Inside, add the following sample HTML:
+        </div>
+        <pre><code>sudo nano /var/www/your_domain/index.html</code></pre>
+        <div class="exam-explanation">
+          Inside, add the following sample HTML:
+        </div>
+        <pre><code>/var/www/your_domain/index.html</code></pre>
+        <pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Welcome to Your_domain!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Success!  The your_domain virtual host is working!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <div class="exam-explanation">
+          Save and close the file when you are finished. If you’re using nano, press CTRL+X, then Y, ENTER to save.
+        </div>
+        <div class="exam-explanation">
+          In order for Apache to serve this content, it’s necessary to create a virtual host file with the correct
+          directives. Instead of modifying the default configuration file located at
+          /etc/apache2/sites-available/000-default.conf directly, make a new one at
+          /etc/apache2/sites-available/your_domain.conf:</div>
+        <pre><code>sudo nano /etc/apache2/sites-available/your_domain.conf</code></pre>
+        <div class="exam-explanation">
+          Add in the following configuration block, which is similar to the default, but updated for your new directory
+          and domain name:
+        </div>
+        <pre><code>/etc/apache2/sites-available/your_domain.conf</code></pre>
+        <pre><code>&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@localhost
+    ServerName your_domain
+    ServerAlias www.your_domain
+    DocumentRoot /var/www/your_domain
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</code></pre>
+        <div class="exam-explanation">
+          Notice that we’ve updated the DocumentRoot to our new directory and ServerAdmin to an email that the
+          your_domain site administrator can access. We’ve also added two directives: ServerName, which establishes the
+          base domain that will match this virtual host definition, and ServerAlias, which defines further names that
+          will match as if they were the base name.</div>
+        <div class="exam-explanation">
+          This is the standard pattern for how to configure Apache virtual hosts in Ubuntu, and it scales cleanly for
+          multiple domains.
+        </div>
+        <div class="exam-explanation">
+          Save and close the file when you are finished. If you’re using nano, press CTRL+X, then Y, ENTER to save.
+        </div>
+        <div class="exam-explanation">
+          Now enable the file with the a2ensite tool:
+        </div>
+        <pre><code>sudo a2ensite your_domain.conf</code></pre>
+        <div class="exam-explanation">
+          Now enable the file with the a2ensite tool:
+        </div>
+        <pre><code>sudo a2dissite 000-default.conf</code></pre>
+        <div class="exam-explanation">
+          Next, test for configuration errors:
+        </div>
+        <pre><code>sudo apache2ctl configtest</code></pre>
+        <div class="exam-explanation">
+          You should receive the following output:
+        </div>
+        <pre><code>Output
+. . .
+Syntax OK
+</code></pre>
+        <div class="exam-explanation">
+          Restart Apache to implement your changes:
+        </div>
+        <pre><code>sudo systemctl restart apache2</code></pre>
+        <div class="exam-explanation">
+          Apache will now be serving your domain name. You can test this by navigating to http://your_domain, where you
+          will see something like the following:
+        </div>
+        <pre><code><html>
+    <head>
+        <title>Welcome to Your_domain!</title>
+    </head>
+    <body>
+        <h1>Success!  The your_domain virtual host is working!</h1>
+    </body>
+</html></code></pre>
       </section>
 
       <!-- Q7 + Q8 -->
       <section class="exam-section" id="q7">
-        <h2>7/8. Copy a file from <code>vm1</code> to <code>vm2</code></h2>
+        <h2>7. Now the page is available with your IP-address but we can do more!!!</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Basierend auf der <code>vm1</code>, kopiere ein File von <code>vm1</code> auf <code>vm2</code>, schreibe Befehl auf.
+          <strong>Now let's make your webpage accessible by domain name</strong>
         </div>
-        <div class="exam-answer-title">Example command (run on vm1)</div>
-        <pre><code>scp ~/file.txt user@vm2:~/</code></pre>
+        <pre><code>example: http://hyperweb.local</code></pre>
+        <div class="exam-answer-title">Requirements</div>
         <div class="exam-explanation">
           <ul>
-            <li>Assumes you are logged in on <code>vm1</code>.</li>
-            <li><code>file.txt</code> is the file you want to copy.</li>
-            <li><code>user@vm2:~/</code> is the target user and target directory on <code>vm2</code>.</li>
+            <li>Your VM and your Local machine are on the same network.</li>
           </ul>
         </div>
-        <div class="exam-explanation">
-          If question 8 is similar, you can use the same pattern with a different file name.
-        </div>
-      </section>
-
-      <!-- Q9 -->
-      <section class="exam-section" id="q9">
-        <h2>9. Copy a file from <code>vm1</code> to a guest VM</h2>
         <div class="exam-question">
-          <strong>Question:</strong> Kopiere ein File von <code>vm1</code> auf eine Gast-VM, schreibe Befehl auf.
+          <strong>Let's Configure your Hostname</strong>
         </div>
-        <div class="exam-answer-title">Example command (run on vm1)</div>
-        <pre><code>scp ~/file.txt user@guest-vm:~/</code></pre>
         <div class="exam-explanation">
-          Replace <code>guest-vm</code> with the correct hostname or IP address given in the exam.
+          Set the VM hostname to your_domain. I am taking "hyperweb" as an example.:
         </div>
-      </section>
-
-      <!-- Q10 -->
-      <section class="exam-section" id="q10">
-        <h2>10. Create <code>my_authorized_keys</code> from three public keys</h2>
+        <pre><code>sudo hostnamectl set-hostname hyperweb</code></pre>
+        <div class="exam-explanation">
+          Edit your Hosts file on your local machine to map the IP address of your VM to the domain name
+        </div>
+        <pre><code>sudo nano /etc/hosts</code></pre>
+        <div class="exam-explanation">
+          Add your VM IP and hostname at the end of the file like this: hyperweb.local is the domain name you want to
+          use.
+        </div>
+        <pre><code>127.0.0.1 localhost
+127.0.1.1 hyperweb
+123.456.78.90 hyperweb.local
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters</code></pre>
         <div class="exam-question">
-          <strong>Question:</strong> Erstelle ein File <code>my_authorized_keys</code> im gleichen Format wie <code>authorized_keys</code> mit (mindestens) drei public keys aus der Klasse.
+          <strong>Let's reconfigure the VirtualHost</strong>
         </div>
-        <div class="exam-answer-title">Example commands</div>
-        <pre><code># assume you downloaded three public keys:
-# key1.pub, key2.pub, key3.pub
-cat key1.pub key2.pub key3.pub &gt; ~/.ssh/my_authorized_keys</code></pre>
         <div class="exam-explanation">
-          <ul>
-            <li>All three lines are concatenated into one file.</li>
-            <li>The format is identical to a normal <code>authorized_keys</code> file: one public key per line.</li>
-          </ul>
+          Create/edit:
         </div>
-      </section>
+        <pre><code>sudo nano /etc/apache2/sites-available/your_domain.conf</code></pre>
+        <div class="exam-explanation">
+          Copy and paste the following configuration, adjust ServerName, ServerAlias and DocumentRoot if necessary:
+        </div>
+        <pre><code>&lt;VirtualHost *:80&gt;
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	ServerName hyperweb.local
+	ServerAlias www.hyperweb.local
 
-      <!-- Q11 -->
-      <section class="exam-section" id="q11">
-        <h2>11. Encrypt a message with <code>openssl</code> and your keypair</h2>
-        <div class="exam-question">
-          <strong>Question:</strong> Verschlüssle mit dem <code>openssl</code> Kommando die Botschaft
-          <code>"Mein name ist Hase"</code> mit deinem Schlüsselpaar, schreibe den Befehl auf.
-        </div>
-        <div class="exam-answer-title">Example with RSA keypair</div>
-        <pre><code>echo "Mein name ist Hase" | \
-openssl rsautl -encrypt -pubin -inkey mykey.pub -out message.enc</code></pre>
-        <div class="exam-explanation">
-          <ul>
-            <li><code>mykey.pub</code> = your public key from question 6.</li>
-            <li><code>-encrypt</code> = encrypt the input.</li>
-            <li><code>-out message.enc</code> = encrypted output file.</li>
-          </ul>
-          To decrypt (for testing), you could use:
-          <pre><code>openssl rsautl -decrypt -inkey mykey -in message.enc</code></pre>
-        </div>
-      </section>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/hyperweb
 
-      <!-- Q12 -->
-      <section class="exam-section" id="q12">
-        <h2>12. <code>netcat</code> command: listen on port 8877</h2>
-        <div class="exam-question">
-          <strong>Question:</strong> <code>netcat</code> Kommando, das auf Port 8877 auf eine Verbindung wartet.
-        </div>
-        <div class="exam-answer-title">Typical commands</div>
-        <pre><code>nc -l 8877</code></pre>
-        <div class="exam-explanation">
-          On some systems you might need:
-          <pre><code>nc -l -p 8877</code></pre>
-          This opens a listener on TCP port 8877 and waits for a client.
-        </div>
-      </section>
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
 
-      <!-- Q13 -->
-      <section class="exam-section" id="q13">
-        <h2>13. <code>netcat</code> STDIO redirect to host on port 4455</h2>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+&lt;/VirtualHost&gt;
+</code></pre>
         <div class="exam-question">
-          <strong>Question:</strong> <code>netcat</code> Kommando, das den STDIO (standard input/output)
-          auf Port 4455 auf Host <code>&lt;ip address&gt;</code> umleitet.
+          <strong>Enable mDNS on Ubuntu (for *.local hostnames)</strong>
         </div>
-        <div class="exam-answer-title">Example command</div>
-        <pre><code>nc &lt;ip address&gt; 4455</code></pre>
         <div class="exam-explanation">
-          <ul>
-            <li>Replace <code>&lt;ip address&gt;</code> with the given IP.</li>
-            <li>Everything you type is sent to that host on port 4455; what the server sends back is shown in your terminal.</li>
-          </ul>
+          Install and start Avahi:
         </div>
+        <pre><code>sudo apt update
+sudo apt install avahi-daemon
+sudo systemctl enable --now avahi-daemon</code></pre>
       </section>
     </main>
 
@@ -342,4 +510,5 @@ openssl rsautl -encrypt -pubin -inkey mykey.pub -out message.enc</code></pre>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>
