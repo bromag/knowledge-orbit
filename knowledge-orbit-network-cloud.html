@@ -137,7 +137,7 @@
         <div class="exam-question">
           <strong>Question:</strong> Kopiere das Dokument <code>a</code> von Teams auf die <code>vm1</code>.
         </div>
-        <div class="exam-answer-title">Example command</div>
+        <div class="exam-answer-title">Command</div>
         <pre><code># run on your host (where Teams file is downloaded)
 scp ~/Downloads/a user@vm1:~/</code></pre>
         <div class="exam-explanation">
@@ -155,7 +155,7 @@ scp ~/Downloads/a user@vm1:~/</code></pre>
         <div class="exam-question">
           <strong>Question:</strong> Kopiere das Dokument <code>b</code> von Teams auf die <code>vm2</code>.
         </div>
-        <div class="exam-answer-title">Example command</div>
+        <div class="exam-answer-title">Command</div>
         <pre><code>scp ~/Downloads/b user@vm2:~/</code></pre>
         <div class="exam-explanation">
           Same idea as question 1, just a different file and target VM.
@@ -168,7 +168,7 @@ scp ~/Downloads/a user@vm1:~/</code></pre>
         <div class="exam-question">
           <strong>Question:</strong> Kopiere das Dokument <code>c</code> von Teams auf die <code>vm1</code> und auf die <code>vm2</code>.
         </div>
-        <div class="exam-answer-title">Example commands</div>
+        <div class="exam-answer-title">Commands</div>
         <pre><code>scp ~/Downloads/c user@vm1:~/
 scp ~/Downloads/c user@vm2:~/</code></pre>
         <div class="exam-explanation">
@@ -234,7 +234,7 @@ echo "hans:hans123" | sudo chpasswd</code></pre>
         <div class="exam-question">
           <strong>Question:</strong> Basierend auf der <code>vm1</code>, kopiere ein File von <code>vm1</code> auf <code>vm2</code>, schreibe Befehl auf.
         </div>
-        <div class="exam-answer-title">Example command (run on vm1)</div>
+        <div class="exam-answer-title">Command (run on vm1)</div>
         <pre><code>scp ~/file.txt user@vm2:~/</code></pre>
         <div class="exam-explanation">
           <ul>
@@ -254,7 +254,7 @@ echo "hans:hans123" | sudo chpasswd</code></pre>
         <div class="exam-question">
           <strong>Question:</strong> Kopiere ein File von <code>vm1</code> auf eine Gast-VM, schreibe Befehl auf.
         </div>
-        <div class="exam-answer-title">Example command (run on vm1)</div>
+        <div class="exam-answer-title">Command (run on vm1)</div>
         <pre><code>scp ~/file.txt user@guest-vm:~/</code></pre>
         <div class="exam-explanation">
           Replace <code>guest-vm</code> with the correct hostname or IP address given in the exam.
@@ -267,7 +267,7 @@ echo "hans:hans123" | sudo chpasswd</code></pre>
         <div class="exam-question">
           <strong>Question:</strong> Erstelle ein File <code>my_authorized_keys</code> im gleichen Format wie <code>authorized_keys</code> mit (mindestens) drei public keys aus der Klasse.
         </div>
-        <div class="exam-answer-title">Example commands</div>
+        <div class="exam-answer-title">Commands</div>
         <pre><code># assume you downloaded three public keys:
 # key1.pub, key2.pub, key3.pub
 cat key1.pub key2.pub key3.pub &gt; ~/.ssh/my_authorized_keys</code></pre>
@@ -322,7 +322,7 @@ openssl rsautl -encrypt -pubin -inkey mykey.pub -out message.enc</code></pre>
           <strong>Question:</strong> <code>netcat</code> Kommando, das den STDIO (standard input/output)
           auf Port 4455 auf Host <code>&lt;ip address&gt;</code> umleitet.
         </div>
-        <div class="exam-answer-title">Example command</div>
+        <div class="exam-answer-title">Command</div>
         <pre><code>nc &lt;ip address&gt; 4455</code></pre>
         <div class="exam-explanation">
           <ul>
