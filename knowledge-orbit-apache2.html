@@ -436,8 +436,8 @@ Syntax OK
         </div>
         <pre><code>sudo nano /etc/hosts</code></pre>
         <div class="exam-explanation">
-          Add your VM IP and hostname at the end of the file like this: hyperweb.local is the domain name you want to
-          use.
+          Add your VM IP and hostname at the end of the file like this: hyperweb.local is the domain name you want
+          touse.
         </div>
         <pre><code>127.0.0.1 localhost
 127.0.1.1 hyperweb
@@ -456,7 +456,8 @@ ff02::2 ip6-allrouters</code></pre>
         </div>
         <pre><code>sudo nano /etc/apache2/sites-available/your_domain.conf</code></pre>
         <div class="exam-explanation">
-          Delete the previous content and copy and paste the following configuration, adjust ServerName, ServerAlias and DocumentRoot if necessary:
+          Delete the previous content and copy and paste the following configuration, adjust ServerName, ServerAlias and
+          DocumentRoot if necessary:
         </div>
         <pre><code>&lt;VirtualHost *:80&gt;
 	# The ServerName directive sets the request scheme, hostname and port that
@@ -498,6 +499,14 @@ ff02::2 ip6-allrouters</code></pre>
         <pre><code>sudo apt update
 sudo apt install avahi-daemon
 sudo systemctl enable --now avahi-daemon</code></pre>
+        <div class="exam-explanation">
+          Now go to your local machine and open your browser, type in the address bar: http://your_domain.local and you
+          should see your webpage.
+        </div>
+        <div class="exam-explanation">
+          And that's it! You have successfully configured your Apache2 web server to be accessible via a custom domain
+          name on your local network.
+        </div>
       </section>
     </main>
 
